@@ -1,0 +1,23 @@
+{
+  "name": "The Saxon Genitive",
+  "short_name": "Saxon Genitive",
+  "description": "A progressive game to learn the Saxon Genitive",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F9EEDC",
+  "theme_color": "#48ACF0",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

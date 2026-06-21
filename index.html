@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-<title>Il Genitivo Sassone — Ms Fatigato</title>
+<title>The Saxon Genitive — Ms Fatigato</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Caveat:wght@600;700&display=swap');
 
@@ -13,7 +13,7 @@
   --ink:#20253B;
   --blue:#48ACF0ff;
   --blue-deep:#084B83ff;
-  --lavender-mist: #FAF3FEff;
+  --lavender-mist:#FAF3FEff;
   --lavender:#ce82f9;
   --lavender-deep:#8D3BB7ff;
   --lime:#deed71;
@@ -145,9 +145,9 @@ h1,h2,h3{font-family:'Fredoka',sans-serif;margin:0;}
 .node-info .nstatus{font-size:0.82rem;color:rgba(32,37,59,0.55);font-weight:700;margin-top:1px;}
 
 .signature{
-  text-align:center;margin-top:36px;color:rgba(32,37,59,0.55);
+  text-align:center;margin-top:36px;color:rgba(32,37,59,0.4);
 }
-.signature .sig{font-family:'Fredoka',sans-serif;font-size:1.1rem;color:var(--coral-deep);}
+.signature .sig{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.02em;}
 
 /* ---------- RULE / INTRO page ---------- */
 .rule-card{margin-bottom:14px;}
@@ -187,7 +187,7 @@ h1,h2,h3{font-family:'Fredoka',sans-serif;margin:0;}
   min-height:64px;background:rgba(32,37,59,0.05);border:2px dashed rgba(32,37,59,0.2);
   border-radius:16px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;
 }
-.answer-zone.empty::before{content:"Tocca le parole qui sotto per iniziare a comporre la frase →";font-size:0.85rem;color:rgba(32,37,59,0.45);font-weight:700;}
+.answer-zone.empty::before{content:"Tap the words below to start building the sentence →";font-size:0.85rem;color:rgba(32,37,59,0.45);font-weight:700;}
 .bank-zone{display:flex;flex-wrap:wrap;gap:8px;}
 .chip{
   font-family:'Fredoka',sans-serif;font-weight:600;font-size:1rem;
@@ -257,7 +257,6 @@ h1,h2,h3{font-family:'Fredoka',sans-serif;margin:0;}
   background:var(--white);color:var(--ink);margin-bottom:12px;
 }
 .text-input:focus{outline:none;border-color:var(--lavender-deep);}
-.it-prompt{font-family:'Caveat',cursive;font-size:1rem;opacity:0.7;display:block;margin-bottom:4px;}
 
 /* lesson complete / finale */
 .complete-wrap{text-align:center;padding-top:18px;}
@@ -277,14 +276,16 @@ footer.credit{text-align:center;margin-top:30px;font-size:0.78rem;color:rgba(32,
   .sentence-card{font-size:1.05rem;}
 }
 </style>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="manifest" href="manifest.json">
 </head>
 <body>
 <div id="app"></div>
 
 <script>
 /* =========================================================
-   IL GENITIVO SASSONE — gioco progressivo
-   Creato da Ms Fatigato
+   THE SAXON GENITIVE — a progressive game
+   Made by Ms Fatigato
    ========================================================= */
 
 function mascotSVG(size, animated){
@@ -345,7 +346,7 @@ function normalizeAnswer(s){
     .trim();
 }
 
-/* Reusable "riordina le parole" engine.
+/* Reusable "put the words in order" engine.
    Mounts into containerEl and calls callbacks.onAttempt(isCorrect) once,
    on the FIRST completed attempt only (for scoring), and callbacks.onSuccess()
    whenever the order is correct (first try or after retries).
@@ -417,15 +418,15 @@ function mountWordOrderGame(containerEl, tokens, callbacks){
 
 const LESSONS = [
 {
-  id:1, color:'coral', eyebrow:'Lezione 1', node:'1',
-  title:`Il genitivo sassone: la 's del possesso`,
+  id:1, color:'coral', eyebrow:'Lesson 1', node:'1',
+  title:`The Saxon Genitive: the possessive 's`,
   ruleBoxes:[
-    {tone:'coral', html:`<h3>📌 La regola base</h3><p>Per dire che qualcosa appartiene a qualcuno, in inglese aggiungiamo <b>l'apostrofo + s</b> ( <b>'s</b> ) al nome del proprietario.</p>
+    {tone:'blue', html:`<h3>📌 The basic rule</h3><p>To say that something belongs to someone, in English we add <b>an apostrophe + s</b> ( <b>'s</b> ) to the owner's name.</p>
       <div class="example-row">
         <span class="tag">Marco</span><span class="arrow">+</span><span class="tag">'s</span><span class="arrow">+</span><span class="tag">bike</span>
       </div>
       <div class="result-sentence">Marco's bike 🚲</div>`},
-    {tone:'lavender', html:`<h3>🔄 Attenzione all'ordine!</h3><p>In italiano diciamo <i>"la bici di Marco"</i> (l'oggetto prima). In inglese l'ordine si ribalta: <b>prima il proprietario, poi l'oggetto</b>.</p>
+    {tone:'lavender', html:`<h3>🔄 Watch the word order!</h3><p>Remember: <b>the owner always comes first</b>, then the thing they own. It's the opposite of what you might expect!</p>
       <div class="example-row">
         <span class="tag dark strike">the bike of Marco</span>
       </div>
@@ -441,15 +442,15 @@ const LESSONS = [
   ]}
 },
 {
-  id:2, color:'lavender', eyebrow:'Lezione 2', node:'2',
-  title:`Frasi più lunghe, stessa regola`,
+  id:2, color:'lavender', eyebrow:'Lesson 2', node:'2',
+  title:`Longer sentences, same rule`,
   ruleBoxes:[
-    {tone:'lavender', html:`<h3>🧩 Trova il blocco</h3><p>La regola non cambia anche dentro frasi intere: cerca prima il blocco <b>[proprietario] + 's + [oggetto]</b>, poi sistema le altre parole intorno.</p>
+    {tone:'lavender', html:`<h3>🧩 Find the chunk</h3><p>The rule doesn't change inside full sentences either: first find the block <b>[owner] + 's + [object]</b>, then build the rest of the sentence around it.</p>
       <div class="example-row">
         <span class="tag dark">My</span><span class="tag">dog</span><span class="tag">'s</span><span class="tag">eyes</span><span class="tag dark">are big</span>
       </div>
       <div class="result-sentence">My dog's eyes are big. 🐶</div>`},
-    {tone:'lime', html:`<h3>💡 Trucco</h3><p>Individua prima chi possiede e cosa viene posseduto, unisci con 's, e solo dopo aggiungi soggetto, verbo e il resto della frase.</p>`}
+    {tone:'lime', html:`<h3>💡 Tip</h3><p>Work out who owns what first, join them with 's, then add the subject, verb and the rest of the sentence.</p>`}
   ],
   game:{type:'order', rounds:[
     {tokens:["My","dog","'s","eyes","are","big"], display:`My dog's eyes are big.`},
@@ -461,77 +462,77 @@ const LESSONS = [
   ]}
 },
 {
-  id:3, color:'blue', eyebrow:'Lezione 3', node:'3',
-  title:`Il plurale: l'apostrofo prima o dopo la s?`,
+  id:3, color:'blue', eyebrow:'Lesson 3', node:'3',
+  title:`Plurals: apostrophe before or after the s?`,
   ruleBoxes:[
-    {tone:'blue', html:`<h3>👤 Un solo proprietario</h3><p>Se il proprietario è uno solo, aggiungi <b>'s</b> (apostrofo + s):</p>
-      <div class="result-sentence">my cousin's dog 🐕 <span class="hand" style="display:block;font-size:1.1rem;">(il cane di UN cugino)</span></div>`},
-    {tone:'lime', html:`<h3>👥 Più proprietari</h3><p>Se i proprietari sono più di uno e la parola è già plurale e finisce in <b>-s</b>, aggiungi <b>solo l'apostrofo</b>:</p>
-      <div class="result-sentence">my cousins' dog 🐕 <span class="hand" style="display:block;font-size:1.1rem;">(il cane DEI cugini, condiviso)</span></div>`},
-    {tone:'coral', html:`<h3>⚠️ Plurali irregolari</h3><p>Attenzione: child→children, man→men, woman→women NON finiscono in -s. Per loro si aggiunge comunque <b>'s</b> anche al plurale: <b>the children's toys</b>.</p>`}
+    {tone:'blue', html:`<h3>👤 One owner</h3><p>If there is only one owner, add <b>'s</b> (apostrophe + s):</p>
+      <div class="result-sentence">my cousin's dog 🐕 <span class="hand" style="display:block;font-size:1.1rem;">(the dog belongs to ONE cousin)</span></div>`},
+    {tone:'lime', html:`<h3>👥 More than one owner</h3><p>If there is more than one owner and the plural noun already ends in <b>-s</b>, add <b>only the apostrophe</b>:</p>
+      <div class="result-sentence">my cousins' dog 🐕 <span class="hand" style="display:block;font-size:1.1rem;">(the dog belongs to several cousins, shared)</span></div>`},
+    {tone:'coral', html:`<h3>⚠️ Irregular plurals</h3><p>Watch out: child→children, man→men, woman→women do NOT end in -s. They still take <b>'s</b> even in the plural: <b>the children's toys</b>.</p>`}
   ],
   game:{type:'apostrophe', rounds:[
-    {words:["my","cousins","dog","is","very","friendly"], targetWord:1, correctGap:6, context:`Ho solo UN cugino: il suo cane è molto amichevole.`, explanation:`Un proprietario solo → apostrofo PRIMA della s finale: cousin's.`, duration:22},
-    {words:["my","cousins","dog","is","very","friendly"], targetWord:1, correctGap:7, context:`Ho DUE cugini: condividono lo stesso cane.`, explanation:`Più proprietari, la parola finisce già in -s → apostrofo DOPO la s: cousins'.`, duration:20},
-    {words:["my","friends","bike","has","a","flat","tyre"], targetWord:1, correctGap:6, context:`Ho un solo amico con la bici forata.`, explanation:`Un proprietario solo → 's prima della s finale: friend's.`, duration:18},
-    {words:["my","friends","bike","has","a","flat","tyre"], targetWord:1, correctGap:7, context:`Ho tre amici: la bici è di tutti loro insieme.`, explanation:`Più proprietari → apostrofo dopo la s: friends'.`, duration:16},
-    {words:["my","kids","favorite","toy","is","a","doll"], targetWord:1, correctGap:3, context:`Ho un solo figlio: il giocattolo preferito è il suo.`, explanation:`Un proprietario solo → apostrofo prima della s finale: kid's.`, duration:15},
-    {words:["my","kids","favorite","toy","is","a","doll"], targetWord:1, correctGap:4, context:`Ho più figli: il giocattolo preferito è di tutti loro.`, explanation:`Più proprietari → apostrofo dopo la s: kids'.`, duration:13}
+    {words:["my","cousins","dog","is","very","friendly"], targetWord:1, correctGap:6, context:`I have only ONE cousin: his dog is very friendly.`, explanation:`Only one owner → apostrophe BEFORE the final s: cousin's.`, duration:22},
+    {words:["my","cousins","dog","is","very","friendly"], targetWord:1, correctGap:7, context:`I have TWO cousins: they share the same dog.`, explanation:`More than one owner, the word already ends in -s → apostrophe AFTER the s: cousins'.`, duration:20},
+    {words:["my","friends","bike","has","a","flat","tyre"], targetWord:1, correctGap:6, context:`I have only one friend, and his bike has a flat tyre.`, explanation:`Only one owner → 's before the final s: friend's.`, duration:18},
+    {words:["my","friends","bike","has","a","flat","tyre"], targetWord:1, correctGap:7, context:`I have three friends: the bike belongs to all of them together.`, explanation:`More than one owner → apostrophe after the s: friends'.`, duration:16},
+    {words:["my","kids","favorite","toy","is","a","doll"], targetWord:1, correctGap:3, context:`I have only ONE child: the favourite toy belongs to him.`, explanation:`Only one owner → apostrophe before the final s: kid's.`, duration:15},
+    {words:["my","kids","favorite","toy","is","a","doll"], targetWord:1, correctGap:4, context:`I have several children: the favourite toy belongs to all of them.`, explanation:`More than one owner → apostrophe after the s: kids'.`, duration:13}
   ]}
 },
 {
-  id:4, color:'blue2', eyebrow:'Lezione 4', node:'4',
-  title:`Eccezioni: gli oggetti non vogliono la 's`,
+  id:4, color:'blue2', eyebrow:'Lesson 4', node:'4',
+  title:`Exceptions: objects don't take 's`,
   ruleBoxes:[
-    {tone:'coral', html:`<h3>🚫 Non per le cose</h3><p>Il genitivo sassone si usa di solito per esseri viventi (persone, animali). Per gli oggetti inanimati si preferisce la struttura con <b>OF</b>.</p>
+    {tone:'coral', html:`<h3>🚫 Not for things</h3><p>The Saxon genitive is normally used for living beings (people, animals). For inanimate objects, we prefer the <b>OF</b> structure.</p>
       <div class="example-row">
         <span class="tag dark strike">the table's legs</span>
       </div>
       <div class="result-sentence">the legs of the table 🪑</div>`},
-    {tone:'blue', html:`<h3>✅ Esseri viventi → 's</h3><p>Persone e animali invece prendono regolarmente 's:</p>
+    {tone:'blue', html:`<h3>✅ Living beings → 's</h3><p>People and animals, on the other hand, regularly take 's:</p>
       <div class="result-sentence">my brother's bike 🚲</div>`}
   ],
   game:{type:'truefalse', rounds:[
-    {sentence:`The cover of my notebook is pink.`, isTrue:true, explanation:`Oggetto inanimato (quaderno) → si usa OF, non 's. Corretto!`},
-    {sentence:`My dog's bowl is empty.`, isTrue:true, explanation:`Il proprietario è un animale (il cane) → 's corretto!`},
-    {sentence:`The windows of the school are big.`, isTrue:true, explanation:`Oggetto inanimato (scuola) → OF. Corretto!`},
-    {sentence:`The computer's keyboard is broken.`, isTrue:false, explanation:`Il computer è un oggetto: niente 's! Si dice "the keyboard of the computer".`},
-    {sentence:`My teacher's pen is blue.`, isTrue:true, explanation:`Il proprietario è una persona (l'insegnante) → 's corretto!`},
-    {sentence:`The garden's gate is old.`, isTrue:false, explanation:`Il giardino è un oggetto/luogo: niente 's, serve OF → "the gate of the garden".`},
-    {sentence:`The cat's whiskers are long.`, isTrue:true, explanation:`Il proprietario è un animale (il gatto) → 's corretto!`},
-    {sentence:`The clock's hands are broken.`, isTrue:false, explanation:`L'orologio è un oggetto: niente 's, serve OF → "the hands of the clock".`}
+    {sentence:`The cover of my notebook is pink.`, isTrue:true, explanation:`Inanimate object (notebook) → use OF, not 's. Correct!`},
+    {sentence:`My dog's bowl is empty.`, isTrue:true, explanation:`The owner is an animal (the dog) → 's is correct!`},
+    {sentence:`The windows of the school are big.`, isTrue:true, explanation:`Inanimate object (school) → OF. Correct!`},
+    {sentence:`The computer's keyboard is broken.`, isTrue:false, explanation:`A computer is an object: no 's! It should be "the keyboard of the computer".`},
+    {sentence:`My teacher's pen is blue.`, isTrue:true, explanation:`The owner is a person (the teacher) → 's is correct!`},
+    {sentence:`The garden's gate is old.`, isTrue:false, explanation:`A garden is a place/object: no 's, use OF → "the gate of the garden".`},
+    {sentence:`The cat's whiskers are long.`, isTrue:true, explanation:`The owner is an animal (the cat) → 's is correct!`},
+    {sentence:`The clock's hands are broken.`, isTrue:false, explanation:`A clock is an object: no 's, use OF → "the hands of the clock".`}
   ]}
 },
 {
-  id:5, color:'lime', eyebrow:'Lezione 5', node:'5',
-  title:`Quando il nome sparisce`,
+  id:5, color:'lime', eyebrow:'Lesson 5', node:'5',
+  title:`When the noun disappears`,
   ruleBoxes:[
-    {tone:'lime', html:`<h3>🏠 Il luogo sottinteso</h3><p>Quando il possessore è un luogo conosciuto (negozio, casa di qualcuno), si può eliminare la cosa posseduta perché è sottintesa.</p>
+    {tone:'blue', html:`<h3>🏠 The implied place</h3><p>When the owner is a well-known place (a shop, someone's house), you can drop the thing that's owned, because it's implied.</p>
       <div class="result-sentence">I go to the baker's. 🥖<span class="hand" style="display:block;font-size:1.1rem;">(= the baker's shop)</span></div>`},
-    {tone:'lavender', html:`<h3>⚠️ Ma l'apostrofo resta!</h3><p>L'apostrofo non deve mai sparire.</p>
+    {tone:'lavender', html:`<h3>⚠️ But the apostrophe stays!</h3><p>The apostrophe must never disappear.</p>
       <div class="example-row"><span class="tag dark strike">my mums car</span></div>
       <div class="result-sentence">my mum's car ✅</div>`}
   ],
   game:{type:'truefalse', rounds:[
-    {sentence:`I left my keys at Marco's.`, isTrue:true, explanation:`"Marco's" = "a casa di Marco", il nome sottinteso è corretto!`},
-    {sentence:`We are meeting at the cinemas tonight.`, isTrue:false, explanation:`Il cinema non è una persona/negozio: niente apostrofo, si dice solo "at the cinema".`},
-    {sentence:`She's having lunch at her aunt's today.`, isTrue:true, explanation:`"Aunt's" = "a casa di sua zia". Corretto!`},
-    {sentence:`We bought bread at the bakers shop.`, isTrue:false, explanation:`Manca l'apostrofo: si scrive "baker's shop".`},
-    {sentence:`He works at the butcher's on Mondays.`, isTrue:true, explanation:`"Butcher's" = "dal macellaio", negozio sottinteso. Corretto!`},
-    {sentence:`I'm going to my uncles for the holidays.`, isTrue:false, explanation:`Manca l'apostrofo: si scrive "my uncle's".`}
+    {sentence:`I left my keys at Marco's.`, isTrue:true, explanation:`"Marco's" = "at Marco's house", the implied noun is correct!`},
+    {sentence:`We are meeting at the cinemas tonight.`, isTrue:false, explanation:`A cinema isn't a person or a shop: no apostrophe, just say "at the cinema".`},
+    {sentence:`She's having lunch at her aunt's today.`, isTrue:true, explanation:`"Aunt's" = "at her aunt's house". Correct!`},
+    {sentence:`We bought bread at the bakers shop.`, isTrue:false, explanation:`Missing apostrophe: it should be "baker's shop".`},
+    {sentence:`He works at the butcher's on Mondays.`, isTrue:true, explanation:`"Butcher's" = "at the butcher's shop", the shop is implied. Correct!`},
+    {sentence:`I'm going to my uncles for the holidays.`, isTrue:false, explanation:`Missing apostrophe: it should be "my uncle's".`}
   ]}
 }
 ];
 
 const FINAL_ROUNDS = [
-  {it:`Lo zaino di Sofia è viola.`, tokens:["Sofia","'s","backpack","is","purple"], note:`Un solo proprietario → 's.`},
-  {it:`Le gambe del tavolo sono di legno.`, tokens:["The","legs","of","the","table","are","wooden"], note:`Oggetto inanimato → si usa OF, non 's.`},
-  {it:`Il cane dei miei cugini è molto vivace.`, tokens:["My","cousins","'","dog","is","very","lively"], note:`Più proprietari, parola già in -s → solo l'apostrofo.`},
-  {it:`Ogni sabato visitiamo la fattoria di mio zio.`, tokens:["Every","Saturday","we","visit","my","uncle","'s","farm"], note:`Un solo proprietario → 's.`},
-  {it:`Vado dal panettiere ogni venerdì.`, tokens:["I","go","to","the","baker","'s","every","Friday"], note:`Negozio sottinteso: the baker's (shop).`},
-  {it:`Il tetto della scuola è grigio.`, tokens:["The","roof","of","the","school","is","grey"], note:`Oggetto inanimato → OF.`},
-  {it:`I giocattoli preferiti dei bambini sono nella scatola.`, tokens:["The","children","'s","favourite","toys","are","in","the","box"], note:`Plurale irregolare (children) → si aggiunge comunque 's.`},
-  {it:`Domani vado dal dentista per un controllo.`, tokens:["Tomorrow","I","am","going","to","the","dentist","'s","for","a","check-up"], note:`Negozio/luogo sottinteso: the dentist's.`}
+  {prompt:`The backpack that belongs to Sofia is purple.`, tokens:["Sofia","'s","backpack","is","purple"], note:`Only one owner → 's.`},
+  {prompt:`The legs belong to the table.`, tokens:["The","legs","of","the","table"], note:`Inanimate object → use OF, not 's.`},
+  {prompt:`The dog that belongs to my cousins is very lively.`, tokens:["My","cousins","'","dog","is","very","lively"], note:`More than one owner, the word already ends in -s → only the apostrophe.`},
+  {prompt:`Every Saturday we visit the farm that belongs to my uncle.`, tokens:["Every","Saturday","we","visit","my","uncle","'s","farm"], note:`Only one owner → 's.`},
+  {prompt:`Rewrite, dropping the unnecessary word: Every Friday I go to the baker's shop.`, tokens:["I","go","to","the","baker","'s","every","Friday"], note:`Implied shop: the baker's (shop).`},
+  {prompt:`The roof belongs to the school.`, tokens:["The","roof","of","the","school"], note:`Inanimate object → OF.`},
+  {prompt:`The favourite toys that belong to the children are in the box.`, tokens:["The","children","'s","favourite","toys","are","in","the","box"], note:`Irregular plural (children) → still takes 's.`},
+  {prompt:`Rewrite, dropping the unnecessary word: Tomorrow I am going to the dentist's clinic for a check-up.`, tokens:["Tomorrow","I","am","going","to","the","dentist","'s","for","a","check-up"], note:`Implied place: the dentist's.`}
 ];
 
 /* ---------------------------------------------------------
@@ -564,7 +565,7 @@ function renderHome(){
   LESSONS.forEach((lesson, idx)=>{
     const res = state.results[lesson.id];
     const stars = res ? starsFor(res.correct,res.total) : 0;
-    const status = res ? `Completata` : `Da iniziare`;
+    const status = res ? `Completed` : `Not started yet`;
     nodesHTML += `
       <div class="node-row">
         <button class="node c-${lesson.color}" data-lesson="${lesson.id}">${lesson.node}</button>
@@ -582,22 +583,22 @@ function renderHome(){
     <div class="node-row">
       <button class="node c-gold" data-final="1">🏁</button>
       <div class="node-info">
-        <div class="ntitle">Sfida finale: tutte le regole insieme!</div>
+        <div class="ntitle">Final challenge: put it all together!</div>
         <div class="nstars">${fres ? starsHTML(fstars) : '<span style="opacity:.35">☆☆☆</span>'}</div>
-        <div class="nstatus">${fres ? 'Completata' : 'Sblocca dopo le 5 lezioni'}</div>
+        <div class="nstatus">${fres ? 'Completed' : 'Unlocks after the 5 lessons'}</div>
       </div>
     </div>`;
 
   app.innerHTML = `
     <div class="home-header">
       ${mascotSVG(86,true)}
-      <h1>Il Genitivo Sassone</h1>
-      <p>Un percorso di giochi per diventare campioni della 's ✍️</p>
+      <h1>The Saxon Genitive</h1>
+      <p>A path of games to become a champion of 's ✍️</p>
     </div>
     ${waveSVG('var(--coral)')}
     <div class="path">${nodesHTML}</div>
     <div class="signature">
-      <div class="sig" style="font-size:2rem;">Ms Fatigato</div>
+      <div class="sig">🍎 Made by Ms Fatigato</div>
     </div>
   `;
 
@@ -629,7 +630,7 @@ function renderIntro(lesson){
     ${boxesHTML}
     ${waveSVG('var(--' + (lesson.color==='blue2'?'blue-deep':lesson.color) + ')')}
     <div style="text-align:center;">
-      <button class="btn lavender" id="startBtn">🎮 Inizia il gioco</button>
+      <button class="btn lavender" id="startBtn">🎮 Start the game</button>
     </div>
   `;
   document.getElementById('homeBtn').onclick = renderHome;
@@ -639,25 +640,25 @@ function renderIntro(lesson){
 
 function renderFinalIntro(){
   const bullets = [
-    ['var(--blue)', `1️⃣ Il proprietario + 's + l'oggetto (l'ordine si ribalta!)`],
-    ['var(--lavender)', `2️⃣ La regola vale anche dentro frasi lunghe`],
-    ['var(--lime-deep)', `3️⃣ Plurale in -s → solo l'apostrofo dopo; plurale irregolare → 's`],
-    ['var(--coral)', `4️⃣ Oggetti inanimati → si usa OF, non 's`],
-    ['var(--blue-deep)', `5️⃣ Per i luoghi conosciuti si può omettere la cosa posseduta`]
+    ['var(--blue)', `1️⃣ Owner + 's + object (the order flips!)`],
+    ['var(--lavender)', `2️⃣ The rule still works inside long sentences`],
+    ['var(--lime-deep)', `3️⃣ Plural in -s → only the apostrophe after; irregular plural → 's`],
+    ['var(--coral)', `4️⃣ Inanimate objects → use OF, not 's`],
+    ['var(--blue-deep)', `5️⃣ For well-known places you can drop the thing that's owned`]
   ];
   app.innerHTML = `
     <div class="topbar">
       <button class="backbtn" id="homeBtn">←</button>
-      <span class="eyebrow" style="background:var(--gold);box-shadow:0 3px 0 var(--gold-deep);">Sfida finale</span>
+      <span class="eyebrow" style="background:var(--gold);box-shadow:0 3px 0 var(--gold-deep);">Final challenge</span>
       <span style="width:42px"></span>
     </div>
-    <h2 style="text-align:center;margin-bottom:6px;font-size:1.3rem;">🏁 Tutte le regole insieme!</h2>
-    <p style="text-align:center;font-weight:700;opacity:0.7;margin-bottom:18px;">8 frasi italiane da tradurre in inglese. Se sei in difficoltà, chiedi un indizio: le parole appariranno da riordinare!</p>
+    <h2 style="text-align:center;margin-bottom:6px;font-size:1.3rem;">🏁 Putting it all together!</h2>
+    <p style="text-align:center;font-weight:700;opacity:0.7;margin-bottom:18px;">8 sentences to rewrite using the Saxon Genitive (or 'of'). Stuck? Ask for a hint and the words will appear for you to reorder!</p>
     <div class="panel" style="margin-bottom:18px;">
       ${bullets.map(b=>`<p style="margin:0 0 10px;font-weight:700;"><span style="color:${b[0]}">●</span> ${b[1]}</p>`).join('')}
     </div>
     <div style="text-align:center;">
-      <button class="btn gold" id="startFinalBtn">🏆 Inizia la sfida finale</button>
+      <button class="btn gold" id="startFinalBtn">🏆 Start the final challenge</button>
     </div>
   `;
   document.getElementById('homeBtn').onclick = renderHome;
@@ -678,20 +679,20 @@ function finishLesson(lesson, correct, total){
 
 function renderComplete(eyebrow, title, correct, total, onContinue){
   const stars = starsFor(correct,total);
-  const msg = stars===3 ? `Perfetto! Sei un vero esperto del genitivo sassone! 🌟`
-            : stars===2 ? `Molto bene! Ci sei quasi! 💪`
-            : stars===1 ? `Bel tentativo, riprova per migliorare! 🙂`
-            : `Niente paura, la pratica rende perfetti. Riprova! 🌱`;
+  const msg = stars===3 ? `Perfect! You're a true Saxon Genitive expert! 🌟`
+            : stars===2 ? `Well done! Almost there! 💪`
+            : stars===1 ? `Good try, have another go to improve! 🙂`
+            : `Don't worry, practice makes perfect. Try again! 🌱`;
   app.innerHTML = `
     <div class="complete-wrap">
       ${mascotSVG(96,true)}
-      <span class="eyebrow">${eyebrow} completata</span>
+      <span class="eyebrow">${eyebrow} complete</span>
       <h2 style="margin:12px 0 4px;font-size:1.25rem;">${title}</h2>
       <div class="stars-big">${starsHTML(stars)}</div>
-      <div class="score-line">${correct} / ${total} corrette</div>
+      <div class="score-line">${correct} / ${total} correct</div>
       <p style="font-weight:700;opacity:0.75;">${msg}</p>
       <div class="btn-row" style="justify-content:center;">
-        <button class="btn lavender" id="contBtn">🗺️ Torna alla mappa</button>
+        <button class="btn lavender" id="contBtn">🗺️ Back to map</button>
       </div>
     </div>
   `;
@@ -700,7 +701,7 @@ function renderComplete(eyebrow, title, correct, total, onContinue){
 }
 
 /* ---------------------------------------------------------
-   ORDER GAME  (riordina le parole)
+   ORDER GAME  (put the words in order)
    --------------------------------------------------------- */
 function runOrderGame(lesson, rounds, onFinish){
   let idx = 0, correct = 0;
@@ -716,7 +717,7 @@ function runOrderGame(lesson, rounds, onFinish){
         <span class="progress">${idx+1} / ${rounds.length}</span>
       </div>
       <div class="game-stage">
-        <p class="prompt-title">🧩 Riordina le parole per formare la frase corretta</p>
+        <p class="prompt-title">🧩 Put the words in the right order</p>
         <div id="orderContainer"></div>
         <div id="feedbackArea"></div>
         <div class="btn-row" id="btnRow"></div>
@@ -731,11 +732,11 @@ function runOrderGame(lesson, rounds, onFinish){
         const btnRow = document.getElementById('btnRow');
         feedbackArea.innerHTML = `
           <div class="feedback good">
-            <div class="fline">✅ Esatto!</div>
+            <div class="fline">✅ Correct!</div>
             <div class="fexpl">${round.display}</div>
           </div>`;
-        btnRow.innerHTML = `<button class="btn" id="nextBtn">${idx+1 < rounds.length ? 'Avanti →' : 'Vedi i risultati →'}</button>
-          <button class="btn ghost" id="speakBtn">🔊 Ascolta</button>`;
+        btnRow.innerHTML = `<button class="btn" id="nextBtn">${idx+1 < rounds.length ? 'Next →' : 'See your results →'}</button>
+          <button class="btn ghost" id="speakBtn">🔊 Listen</button>`;
         document.getElementById('nextBtn').onclick = ()=>{ idx++; showRound(); };
         document.getElementById('speakBtn').onclick = ()=> speak(round.display);
       },
@@ -744,10 +745,10 @@ function runOrderGame(lesson, rounds, onFinish){
         const btnRow = document.getElementById('btnRow');
         feedbackArea.innerHTML = `
           <div class="feedback bad">
-            <div class="fline">❌ Non ancora, l'ordine non è giusto.</div>
-            <div class="fexpl">Tocca le parole nella frase per rimuoverle e riprova!</div>
+            <div class="fline">❌ Not quite, the order isn't right.</div>
+            <div class="fexpl">Tap the words in the sentence to remove them and try again!</div>
           </div>`;
-        btnRow.innerHTML = `<button class="btn coral" id="retryBtn">🔁 Svuota e riprova</button>`;
+        btnRow.innerHTML = `<button class="btn coral" id="retryBtn">🔁 Clear and try again</button>`;
         document.getElementById('retryBtn').onclick = ()=>{ feedbackArea.innerHTML=''; btnRow.innerHTML=''; resetFn(); };
       }
     });
@@ -804,13 +805,13 @@ function runApostropheGame(lesson, rounds, onFinish){
         <span class="progress">${idx+1} / ${rounds.length}</span>
       </div>
       <div class="game-stage">
-        <p class="prompt-title">✍️ Tocca il punto giusto per inserire l'apostrofo</p>
+        <p class="prompt-title">✍️ Tap the right spot to add the apostrophe</p>
         <div class="context-box">${round.context}</div>
         <div class="timerbar"><div class="fill" id="timerFill"></div></div>
         <div class="track-wrapper" id="trackWrapper">
           <div class="track" id="track">${buildSentenceHTML(round.words)}</div>
         </div>
-        <p class="hint">La frase scorre lentamente: trova la parola giusta e tocca il punto dove va l'apostrofo!</p>
+        <p class="hint">The sentence scrolls by slowly: find the right word and tap where the apostrophe goes!</p>
         <div id="feedbackArea"></div>
         <div class="btn-row" id="btnRow"></div>
       </div>
@@ -855,10 +856,10 @@ function runApostropheGame(lesson, rounds, onFinish){
       const btnRow = document.getElementById('btnRow');
       feedbackArea.innerHTML = `
         <div class="feedback ${isCorrect?'good':'bad'}">
-          <div class="fline">${isCorrect? '✅ Esatto!' : "❌ Quasi! Ecco dov'è la posizione giusta:"}</div>
+          <div class="fline">${isCorrect? '✅ Correct!' : "❌ Almost! Here's the right spot:"}</div>
           <div class="fexpl">${round.explanation}</div>
         </div>`;
-      btnRow.innerHTML = `<button class="btn" id="nextBtn">${idx+1 < rounds.length ? 'Avanti →' : 'Vedi i risultati →'}</button>`;
+      btnRow.innerHTML = `<button class="btn" id="nextBtn">${idx+1 < rounds.length ? 'Next →' : 'See your results →'}</button>`;
       document.getElementById('nextBtn').onclick = ()=>{ idx++; showRound(); };
     }
 
@@ -886,11 +887,11 @@ function runTrueFalseGame(lesson, rounds, onFinish){
         <span class="progress">${idx+1} / ${rounds.length}</span>
       </div>
       <div class="game-stage">
-        <p class="prompt-title">🤔 La frase è giusta o sbagliata?</p>
+        <p class="prompt-title">🤔 Is the sentence correct or wrong?</p>
         <div class="sentence-card">${round.sentence}</div>
         <div class="tf-row" id="tfRow">
-          <button class="btn lime" data-choice="true">✅ Giusta</button>
-          <button class="btn coral" data-choice="false">❌ Sbagliata</button>
+          <button class="btn lime" data-choice="true">✅ Correct</button>
+          <button class="btn coral" data-choice="false">❌ Wrong</button>
         </div>
         <div id="feedbackArea"></div>
         <div class="btn-row" id="btnRow"></div>
@@ -909,10 +910,10 @@ function runTrueFalseGame(lesson, rounds, onFinish){
         const btnRow = document.getElementById('btnRow');
         feedbackArea.innerHTML = `
           <div class="feedback ${isCorrect?'good':'bad'}">
-            <div class="fline">${isCorrect? '✅ Esatto!' : (round.isTrue ? '❌ In realtà è GIUSTA.' : '❌ In realtà è SBAGLIATA.')}</div>
+            <div class="fline">${isCorrect? '✅ Correct!' : (round.isTrue ? '❌ It is actually CORRECT.' : '❌ It is actually WRONG.')}</div>
             <div class="fexpl">${round.explanation}</div>
           </div>`;
-        btnRow.innerHTML = `<button class="btn" id="nextBtn">${idx+1 < rounds.length ? 'Avanti →' : 'Vedi i risultati →'}</button>`;
+        btnRow.innerHTML = `<button class="btn" id="nextBtn">${idx+1 < rounds.length ? 'Next →' : 'See your results →'}</button>`;
         document.getElementById('nextBtn').onclick = ()=>{ idx++; showRound(); };
       };
     });
@@ -924,9 +925,9 @@ function runTrueFalseGame(lesson, rounds, onFinish){
 }
 
 /* ---------------------------------------------------------
-   FINAL CHALLENGE — Italian → English translation.
-   If the player asks for a hint, the screen switches to a
-   word-reorder helper (reusing mountWordOrderGame).
+   FINAL CHALLENGE — rewrite each sentence using the Saxon
+   Genitive (or 'of'). A hint switches to a word-reorder
+   helper (reusing mountWordOrderGame).
    --------------------------------------------------------- */
 function runFinalGame(){
   let idx = 0, correct = 0;
@@ -945,17 +946,17 @@ function runFinalGame(){
     app.innerHTML = `
       <div class="topbar">
         <button class="backbtn" id="homeBtn">←</button>
-        <span class="eyebrow" style="background:var(--gold);box-shadow:0 3px 0 var(--gold-deep);">Sfida finale</span>
+        <span class="eyebrow" style="background:var(--gold);box-shadow:0 3px 0 var(--gold-deep);">Final challenge</span>
         <span class="progress">${idx+1} / ${rounds.length}</span>
       </div>
       <div class="game-stage">
-        <p class="prompt-title">📝 Traduci in inglese</p>
-        <div class="sentence-card">${round.it}</div>
+        <p class="prompt-title">📝 Rewrite using the Saxon Genitive (or 'of')</p>
+        <div class="sentence-card">${round.prompt}</div>
         <div id="answerArea">
-          <input type="text" id="translateInput" class="text-input" placeholder="Scrivi la traduzione in inglese..." autocomplete="off" autocapitalize="off" />
+          <input type="text" id="translateInput" class="text-input" placeholder="Type your sentence here..." autocomplete="off" autocapitalize="off" />
           <div class="btn-row">
-            <button class="btn gold" id="checkBtn">✅ Controlla</button>
-            <button class="btn ghost" id="hintBtn">💡 Indizio</button>
+            <button class="btn gold" id="checkBtn">✅ Check</button>
+            <button class="btn ghost" id="hintBtn">💡 Hint</button>
           </div>
         </div>
         <div id="feedbackArea"></div>
@@ -977,10 +978,10 @@ function runFinalGame(){
       const btnRow = document.getElementById('btnRow');
       feedbackArea.innerHTML = `
         <div class="feedback good">
-          <div class="fline">${hintUsed ? "👍 Frase completata con l'aiuto dell'indizio." : '✅ Esatto!'}</div>
+          <div class="fline">${hintUsed ? "👍 Sentence completed with the hint." : '✅ Correct!'}</div>
           <div class="fexpl">${correctSentence}<br><span style="opacity:.8;">${round.note}</span></div>
         </div>`;
-      btnRow.innerHTML = `<button class="btn gold" id="nextBtn">${idx+1<rounds.length?'Avanti →':'Vedi i risultati →'}</button>`;
+      btnRow.innerHTML = `<button class="btn gold" id="nextBtn">${idx+1<rounds.length?'Next →':'See your results →'}</button>`;
       document.getElementById('nextBtn').onclick = goNext;
     }
 
@@ -999,8 +1000,8 @@ function runFinalGame(){
       } else {
         document.getElementById('feedbackArea').innerHTML = `
           <div class="feedback bad">
-            <div class="fline">❌ Non ancora giusta.</div>
-            <div class="fexpl">Controlla l'ordine delle parole e l'apostrofo, poi riprova oppure chiedi un indizio.</div>
+            <div class="fline">❌ Not quite right yet.</div>
+            <div class="fexpl">Check the word order and the apostrophe, then try again or ask for a hint.</div>
           </div>`;
       }
     }
@@ -1011,7 +1012,7 @@ function runFinalGame(){
       if(!scored) scored = true;
       const answerArea = document.getElementById('answerArea');
       answerArea.innerHTML = `
-        <p class="hint" style="margin-bottom:8px;">💡 Riordina le parole per formare la frase:</p>
+        <p class="hint" style="margin-bottom:8px;">💡 Put the words in the right order:</p>
         <div id="hintOrderContainer"></div>
         <p id="hintFeedback" style="text-align:center;font-weight:700;color:var(--coral-deep);min-height:20px;margin-top:8px;"></p>
       `;
@@ -1019,7 +1020,7 @@ function runFinalGame(){
         onSuccess: ()=>{ locked = true; showSuccess(); },
         onWrong: (resetFn)=>{
           const hf = document.getElementById('hintFeedback');
-          if(hf) hf.textContent = '❌ Non ancora, riprova!';
+          if(hf) hf.textContent = '❌ Not yet, try again!';
           resetFn();
         }
       });
@@ -1042,17 +1043,16 @@ function renderFinalComplete(correct,total){
   app.innerHTML = `
     <div class="complete-wrap">
       ${mascotSVG(110,true)}
-      <span class="eyebrow" style="background:var(--gold);box-shadow:0 3px 0 var(--gold-deep);">Sfida finale completata 🏆</span>
-      <h2 style="margin:14px 0 4px;font-size:1.4rem;">Hai conquistato il Genitivo Sassone!</h2>
+      <span class="eyebrow" style="background:var(--gold);box-shadow:0 3px 0 var(--gold-deep);">Final challenge complete 🏆</span>
+      <h2 style="margin:14px 0 4px;font-size:1.4rem;">You've conquered the Saxon Genitive!</h2>
       <div class="stars-big">${starsHTML(stars)}</div>
-      <div class="score-line">${correct} / ${total} corrette</div>
-      <p style="font-weight:700;opacity:0.75;">${stars===3?'Punteggio pieno! Sei un vero campione! 🌟':stars===2?'Ottimo lavoro! 💪':stars===1?'Bel percorso, riprova le lezioni più deboli! 🙂':'Ripassa le lezioni e riprova: ce la puoi fare! 🌱'}</p>
+      <div class="score-line">${correct} / ${total} correct</div>
+      <p style="font-weight:700;opacity:0.75;">${stars===3?'Full marks! A true champion! 🌟':stars===2?'Great work! 💪':stars===1?'Good run — try the weaker lessons again! 🙂':'Review the lessons and try again: you can do it! 🌱'}</p>
       <div class="btn-row" style="justify-content:center;">
-        <button class="btn lavender" id="contBtn">🗺️ Torna alla mappa</button>
+        <button class="btn lavender" id="contBtn">🗺️ Back to map</button>
       </div>
       <div class="signature" style="margin-top:40px;">
-        <div class="sig">un gioco di</div>
-        <div class="sig" style="font-size:2rem;">Ms Fatigato</div>
+        <div class="sig">🍎 A game by Ms Fatigato</div>
       </div>
     </div>
   `;
