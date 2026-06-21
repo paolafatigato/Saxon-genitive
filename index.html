@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Il Genitivo Sassone — Ms Fatigato</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Caveat:wght@600;700&display=swap');
+
+:root{
+  --cream:#F9EEDCff;
+  --paper:#FFFDF8;
+  --ink:#20253B;
+  --blue:#48ACF0ff;
+  --blue-deep:#084B83ff;
+  --lavender-mist: #FAF3FEff;
+  --lavender:#ce82f9;
+  --lavender-deep:#8D3BB7ff;
+  --lime:#deed71;
+  --lime-deep:#4B924Dff;
+  --coral:#FF776Aff;
+  --coral-deep:#FDA79Bff;
+  --gold:#FFFD82ff;
+  --gold-deep:#FFD8D3ff;
+  --white:#FFFFFF;
+  --shadow: 0 6px 0 rgba(32,37,59,0.12);
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--cream);
+  background-image:
+    radial-gradient(circle at 8% 12%, rgba(79,168,222,0.10) 0, transparent 38%),
+    radial-gradient(circle at 92% 18%, rgba(239,92,123,0.09) 0, transparent 40%),
+    radial-gradient(circle at 50% 95%, rgba(199,221,75,0.12) 0, transparent 45%);
+  font-family:'Nunito',sans-serif;
+  color:var(--ink);
+  min-height:100vh;
+  -webkit-tap-highlight-color: transparent;
+}
+button{font-family:inherit;}
+button:focus-visible, .chip:focus-visible, .gap:focus-visible{
+  outline:3px solid var(--coral-deep);
+  outline-offset:2px;
+}
+h1,h2,h3{font-family:'Fredoka',sans-serif;margin:0;}
+.hand{font-family:'Caveat',cursive;}
+
+#app{
+  max-width:760px;
+  margin:0 auto;
+  min-height:100vh;
+  padding:18px 16px 48px;
+  position:relative;
+}
+
+/* ---------- generic bits ---------- */
+.eyebrow{
+  display:inline-block;
+  font-family:'Fredoka',sans-serif;
+  font-weight:600;
+  font-size:0.78rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--white);
+  background:var(--coral);
+  padding:5px 14px;
+  border-radius:999px;
+  box-shadow: 0 3px 0 var(--coral-deep);
+}
+.wave-divider{width:100%;height:26px;display:block;margin:14px 0;}
+.panel{
+  background:var(--paper);
+  border-radius:24px;
+  padding:20px 20px;
+  box-shadow:var(--shadow);
+  border:2px solid rgba(32,37,59,0.06);
+}
+.btn{
+  font-family:'Fredoka',sans-serif;
+  font-weight:600;
+  font-size:1rem;
+  border:none;
+  border-radius:16px;
+  padding:13px 22px;
+  cursor:pointer;
+  color:var(--white);
+  background:var(--blue);
+  box-shadow:0 5px 0 var(--blue-deep);
+  transition:transform .08s ease;
+  -webkit-user-select:none;user-select:none;
+}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--blue-deep);}
+.btn.lavender{background:var(--lavender);box-shadow:0 5px 0 var(--lavender-deep);}
+.btn.lime{background:var(--lime-deep);box-shadow:0 5px 0 #7c8c20;}
+.btn.coral{background:var(--coral);box-shadow:0 5px 0 var(--coral-deep);}
+.btn.gold{background:var(--gold);box-shadow:0 5px 0 var(--gold-deep);}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:none;border:2px solid rgba(32,37,59,0.18);padding:10px 18px;}
+.btn:disabled{opacity:0.45;cursor:default;}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px;}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;}
+.topbar .backbtn{
+  background:var(--white);border:2px solid rgba(32,37,59,0.1);border-radius:14px;
+  width:42px;height:42px;display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;cursor:pointer;flex:none;box-shadow:0 3px 0 rgba(32,37,59,0.1);
+}
+.topbar .progress{font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.9rem;color:var(--ink);opacity:0.75;}
+
+/* ---------- mascot ---------- */
+.mascot{display:block;}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-9px) rotate(3deg);}}
+.mascot-anim{animation:bob 2.6s ease-in-out infinite;}
+@media (prefers-reduced-motion: reduce){.mascot-anim{animation:none;}}
+
+/* ---------- HOME / PATH ---------- */
+.home-header{text-align:center;margin-bottom:6px;}
+.home-header h1{font-size:1.7rem;color:var(--ink);line-height:1.15;}
+.home-header p{margin:6px 0 0;color:rgba(32,37,59,0.65);font-weight:600;font-size:0.95rem;}
+
+.path{position:relative;margin:30px 0 10px;padding-left:8px;}
+.node-row{display:flex;align-items:center;gap:16px;position:relative;padding:10px 0;}
+.node-row:not(:last-child)::after{
+  content:"";position:absolute;left:33px;top:78px;bottom:-22px;width:5px;
+  border-left:5px dotted rgba(32,37,59,0.18);
+}
+.node{
+  flex:none;width:68px;height:68px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.5rem;color:white;
+  cursor:pointer;border:none;box-shadow:0 5px 0 rgba(0,0,0,0.18);
+  position:relative;
+}
+.node:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,0.18);}
+.node.c-blue{background:var(--blue);}
+.node.c-lavender{background:var(--lavender);}
+.node.c-lime{background:var(--lime-deep);}
+.node.c-coral{background:var(--coral);}
+.node.c-blue2{background:var(--blue-deep);}
+.node.c-gold{background:var(--gold);}
+.node-info{flex:1;}
+.node-info .ntitle{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.02rem;}
+.node-info .nstars{font-size:0.95rem;letter-spacing:2px;margin-top:2px;}
+.node-info .nstatus{font-size:0.82rem;color:rgba(32,37,59,0.55);font-weight:700;margin-top:1px;}
+
+.signature{
+  text-align:center;margin-top:36px;color:rgba(32,37,59,0.55);
+}
+.signature .sig{font-family:'Fredoka',sans-serif;font-size:1.1rem;color:var(--coral-deep);}
+
+/* ---------- RULE / INTRO page ---------- */
+.rule-card{margin-bottom:14px;}
+.rule-card.blue{background:linear-gradient(180deg,var(--blue),var(--blue-deep));color:white;border:none;}
+.rule-card.lavender{background:linear-gradient(180deg,var(--lavender),var(--lavender-deep));color:white;border:none;}
+.rule-card.lime{background:linear-gradient(180deg,var(--lime),var(--lime-deep));color:var(--ink);border:none;}
+.rule-card.coral{background:linear-gradient(180deg,var(--coral),var(--coral-deep));color:white;border:none;}
+.rule-card h3{font-size:1.15rem;margin-bottom:8px;}
+.rule-card p{margin:0;line-height:1.5;font-weight:600;font-size:0.98rem;}
+.example-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.tag{
+  background:rgba(255,255,255,0.22);border-radius:12px;padding:7px 12px;
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.95rem;
+}
+.tag.dark{background:rgba(32,37,59,0.12);}
+.arrow{font-size:1.1rem;opacity:0.85;}
+.result-sentence{
+  margin-top:12px;font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.15rem;
+  background:rgba(255,255,255,0.28);display:inline-block;padding:8px 16px;border-radius:14px;
+}
+.strike{text-decoration:line-through;opacity:0.7;}
+
+/* ---------- GAME shared ---------- */
+.game-stage{margin-top:6px;}
+.prompt-title{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.05rem;margin-bottom:14px;text-align:center;}
+.feedback{
+  margin-top:16px;border-radius:18px;padding:14px 16px;font-weight:700;
+  display:flex;flex-direction:column;gap:6px;
+}
+.feedback.good{background:rgba(199,221,75,0.35);border:2px solid var(--lime-deep);}
+.feedback.bad{background:rgba(239,92,123,0.18);border:2px solid var(--coral);}
+.feedback .fline{font-family:'Fredoka',sans-serif;font-size:1.02rem;}
+.feedback .fexpl{font-weight:600;font-size:0.92rem;opacity:0.85;}
+
+/* word order game */
+.answer-zone{
+  min-height:64px;background:rgba(32,37,59,0.05);border:2px dashed rgba(32,37,59,0.2);
+  border-radius:16px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;
+}
+.answer-zone.empty::before{content:"Tocca le parole qui sotto per iniziare a comporre la frase →";font-size:0.85rem;color:rgba(32,37,59,0.45);font-weight:700;}
+.bank-zone{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:1rem;
+  background:var(--lavender);color:white;border:none;border-radius:12px;
+  padding:10px 14px;cursor:pointer;box-shadow:0 3px 0 var(--lavender-deep);min-height:44px;
+}
+.chip:active{transform:translateY(2px);box-shadow:0 1px 0 var(--lavender-deep);}
+.chip.punct{background:var(--coral);box-shadow:0 3px 0 var(--coral-deep);font-size:1.1rem;padding:10px 16px;}
+.chip.placed{background:var(--blue);box-shadow:0 3px 0 var(--blue-deep);}
+.chip.placed.punct{background:var(--coral);box-shadow:0 3px 0 var(--coral-deep);}
+
+/* apostrophe scroller game */
+.context-box{
+  background:rgba(32,37,59,0.05);border-radius:14px;padding:10px 14px;font-weight:700;
+  font-size:0.92rem;margin-bottom:16px;text-align:center;
+}
+.track-wrapper{
+  position:relative;overflow:hidden;height:100px;background:var(--white);
+  border-radius:18px;border:2px solid rgba(32,37,59,0.1);margin-bottom:10px;
+}
+.track-wrapper::before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:3px;background:var(--coral);
+  transform:translateX(-50%);z-index:3;opacity:0.85;
+}
+.track{
+  position:absolute;top:50%;left:100%;transform:translate(0,-50%);
+  display:flex;align-items:center;white-space:nowrap;will-change:left;
+}
+.letter{
+  font-family:'Fredoka',sans-serif;font-size:1.8rem;font-weight:600;color:var(--ink);
+  display:inline-block;padding:0 1px;
+}
+.gap{
+  display:inline-block;width:16px;height:64px;cursor:pointer;position:relative;
+}
+.wordspace{
+  display:inline-block;width:13px;height:64px;
+}
+.gap::after{
+  content:"";position:absolute;left:50%;top:8px;bottom:8px;width:3px;background:transparent;
+  transform:translateX(-50%);border-radius:3px;
+}
+.gap:hover::after, .gap:focus-visible::after{background:rgba(156,143,224,0.45);}
+.apos-mark{color:var(--coral-deep);font-weight:800;}
+.timerbar{height:6px;border-radius:6px;background:rgba(32,37,59,0.1);overflow:hidden;margin-bottom:18px;}
+.timerbar .fill{height:100%;background:var(--coral);}
+.hint{text-align:center;font-size:0.82rem;color:rgba(32,37,59,0.5);font-weight:700;margin-top:-2px;margin-bottom:14px;}
+
+/* true / false */
+.sentence-card{
+  background:var(--white);border-radius:18px;padding:22px 18px;text-align:center;
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.2rem;line-height:1.4;
+  border:2px solid rgba(32,37,59,0.08);margin-bottom:18px;
+}
+.tf-row{display:flex;gap:12px;}
+.tf-row .btn{flex:1;font-size:1.05rem;padding:16px;}
+
+/* multiple choice */
+.mc-options{display:flex;flex-direction:column;gap:10px;}
+.mc-options .btn{width:100%;text-align:left;font-size:1.05rem;}
+.blank{color:var(--coral-deep);border-bottom:3px dotted var(--coral-deep);padding:0 4px;}
+
+/* translation game (final challenge) */
+.text-input{
+  width:100%;font-family:'Fredoka',sans-serif;font-size:1.05rem;font-weight:600;
+  padding:14px 16px;border-radius:14px;border:2px solid rgba(32,37,59,0.18);
+  background:var(--white);color:var(--ink);margin-bottom:12px;
+}
+.text-input:focus{outline:none;border-color:var(--lavender-deep);}
+.it-prompt{font-family:'Caveat',cursive;font-size:1rem;opacity:0.7;display:block;margin-bottom:4px;}
+
+/* lesson complete / finale */
+.complete-wrap{text-align:center;padding-top:18px;}
+.stars-big{font-size:2.6rem;letter-spacing:6px;margin:10px 0;}
+.score-line{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.1rem;margin-bottom:6px;}
+
+.confetti{position:fixed;top:-20px;width:10px;height:16px;border-radius:2px;z-index:50;animation:fall linear forwards;}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0.9;}}
+@media (prefers-reduced-motion: reduce){.confetti{display:none;}}
+
+footer.credit{text-align:center;margin-top:30px;font-size:0.78rem;color:rgba(32,37,59,0.4);font-weight:700;}
+
+@media (max-width:420px){
+  .home-header h1{font-size:1.4rem;}
+  .node{width:58px;height:58px;font-size:1.2rem;}
+  .letter{font-size:1.7rem;}
+  .sentence-card{font-size:1.05rem;}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* =========================================================
+   IL GENITIVO SASSONE — gioco progressivo
+   Creato da Ms Fatigato
+   ========================================================= */
+
+function mascotSVG(size, animated){
+  return `<svg class="mascot ${animated?'mascot-anim':''}" width="${size}" height="${size*1.3}" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+    <path d="M50 5 C75 5 90 25 90 50 C90 75 75 90 55 95 C60 105 55 120 40 125 C50 110 45 100 35 95 C15 88 10 65 10 50 C10 22 28 5 50 5 Z" fill="var(--lavender)"/>
+    <circle cx="25" cy="55" r="7" fill="#F7A8BD" opacity="0.55"/>
+    <circle cx="77" cy="55" r="7" fill="#F7A8BD" opacity="0.55"/>
+    <circle cx="38" cy="48" r="6" fill="var(--ink)"/>
+    <circle cx="64" cy="48" r="6" fill="var(--ink)"/>
+    <circle cx="40" cy="46" r="2" fill="#fff"/>
+    <circle cx="66" cy="46" r="2" fill="#fff"/>
+    <path d="M35 65 Q50 80 67 65" stroke="var(--ink)" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </svg>`;
+}
+
+function waveSVG(color){
+  return `<svg class="wave-divider" viewBox="0 0 600 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 20 Q 50 0 100 20 T 200 20 T 300 20 T 400 20 T 500 20 T 600 20" stroke="${color}" stroke-width="5" fill="none" stroke-linecap="round"/>
+  </svg>`;
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function speak(text){
+  try{
+    if(!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-GB';
+    u.rate = 0.92;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+function joinTokens(tokens){
+  let out = '';
+  tokens.forEach((t,i)=>{
+    const isPunct = (t === "'s" || t === "'");
+    if(i===0) out += t;
+    else if(isPunct) out += t;
+    else out += ' ' + t;
+  });
+  return out;
+}
+
+function normalizeAnswer(s){
+  return s.toLowerCase()
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[.,!?]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/* Reusable "riordina le parole" engine.
+   Mounts into containerEl and calls callbacks.onAttempt(isCorrect) once,
+   on the FIRST completed attempt only (for scoring), and callbacks.onSuccess()
+   whenever the order is correct (first try or after retries).
+   Chips stay clickable after a wrong attempt — only a correct answer locks the round. */
+function mountWordOrderGame(containerEl, tokens, callbacks){
+  const original = tokens.map((t,i)=>({text:t, oi:i}));
+  const shuffled = shuffle(original);
+  let answer = [];
+  let locked = false;
+  let scored = false;
+
+  containerEl.innerHTML = `
+    <div class="answer-zone empty" id="ogAnswerZone"></div>
+    <div class="bank-zone" id="ogBankZone"></div>
+  `;
+
+  function chipHTML(item, placed){
+    const isPunct = (item.text === "'s" || item.text === "'");
+    return `<button class="chip ${isPunct?'punct':''} ${placed?'placed':''}" data-oi="${item.oi}">${item.text}</button>`;
+  }
+
+  function draw(){
+    const answerZone = containerEl.querySelector('#ogAnswerZone');
+    const bankZone = containerEl.querySelector('#ogBankZone');
+    answerZone.classList.toggle('empty', answer.length===0);
+    answerZone.innerHTML = answer.map(it=>chipHTML(it,true)).join('');
+    const placedOi = new Set(answer.map(a=>a.oi));
+    bankZone.innerHTML = shuffled.filter(it=>!placedOi.has(it.oi)).map(it=>chipHTML(it,false)).join('');
+
+    answerZone.querySelectorAll('.chip').forEach(btn=>{
+      btn.onclick = ()=>{
+        if(locked) return;
+        const oi = Number(btn.dataset.oi);
+        answer = answer.filter(a=>a.oi!==oi);
+        draw();
+      };
+    });
+    bankZone.querySelectorAll('.chip').forEach(btn=>{
+      btn.onclick = ()=>{
+        if(locked) return;
+        const oi = Number(btn.dataset.oi);
+        answer.push(shuffled.find(s=>s.oi===oi));
+        draw();
+        if(answer.length === tokens.length) check();
+      };
+    });
+  }
+
+  function check(){
+    const ok = answer.every((a,i)=> a.oi === i);
+    if(!scored){
+      scored = true;
+      if(callbacks.onAttempt) callbacks.onAttempt(ok);
+    }
+    if(ok){
+      locked = true;
+      if(callbacks.onSuccess) callbacks.onSuccess();
+    } else {
+      if(callbacks.onWrong) callbacks.onWrong(()=>{ answer = []; draw(); });
+    }
+  }
+
+  draw();
+}
+
+/* ---------------------------------------------------------
+   DATA
+   --------------------------------------------------------- */
+
+const LESSONS = [
+{
+  id:1, color:'coral', eyebrow:'Lezione 1', node:'1',
+  title:`Il genitivo sassone: la 's del possesso`,
+  ruleBoxes:[
+    {tone:'coral', html:`<h3>📌 La regola base</h3><p>Per dire che qualcosa appartiene a qualcuno, in inglese aggiungiamo <b>l'apostrofo + s</b> ( <b>'s</b> ) al nome del proprietario.</p>
+      <div class="example-row">
+        <span class="tag">Marco</span><span class="arrow">+</span><span class="tag">'s</span><span class="arrow">+</span><span class="tag">bike</span>
+      </div>
+      <div class="result-sentence">Marco's bike 🚲</div>`},
+    {tone:'lavender', html:`<h3>🔄 Attenzione all'ordine!</h3><p>In italiano diciamo <i>"la bici di Marco"</i> (l'oggetto prima). In inglese l'ordine si ribalta: <b>prima il proprietario, poi l'oggetto</b>.</p>
+      <div class="example-row">
+        <span class="tag dark strike">the bike of Marco</span>
+      </div>
+      <div class="result-sentence">Marco's bike ✅</div>`}
+  ],
+  game:{type:'order', rounds:[
+    {tokens:["Marco","'s","bike"], display:`Marco's bike.`},
+    {tokens:["Giulia","'s","scarf"], display:`Giulia's scarf.`},
+    {tokens:["Leo","'s","skateboard"], display:`Leo's skateboard.`},
+    {tokens:["Sofia","'s","umbrella"], display:`Sofia's umbrella.`},
+    {tokens:["Tommy","'s","guitar"], display:`Tommy's guitar.`},
+    {tokens:["Emma","'s","rabbit"], display:`Emma's rabbit.`}
+  ]}
+},
+{
+  id:2, color:'lavender', eyebrow:'Lezione 2', node:'2',
+  title:`Frasi più lunghe, stessa regola`,
+  ruleBoxes:[
+    {tone:'lavender', html:`<h3>🧩 Trova il blocco</h3><p>La regola non cambia anche dentro frasi intere: cerca prima il blocco <b>[proprietario] + 's + [oggetto]</b>, poi sistema le altre parole intorno.</p>
+      <div class="example-row">
+        <span class="tag dark">My</span><span class="tag">dog</span><span class="tag">'s</span><span class="tag">eyes</span><span class="tag dark">are big</span>
+      </div>
+      <div class="result-sentence">My dog's eyes are big. 🐶</div>`},
+    {tone:'lime', html:`<h3>💡 Trucco</h3><p>Individua prima chi possiede e cosa viene posseduto, unisci con 's, e solo dopo aggiungi soggetto, verbo e il resto della frase.</p>`}
+  ],
+  game:{type:'order', rounds:[
+    {tokens:["My","dog","'s","eyes","are","big"], display:`My dog's eyes are big.`},
+    {tokens:["The","cat","'s","tail","is","long"], display:`The cat's tail is long.`},
+    {tokens:["Our","teacher","'s","car","is","blue"], display:`Our teacher's car is blue.`},
+    {tokens:["Every","morning","I","feed","my","cat","'s","kittens"], display:`Every morning I feed my cat's kittens.`},
+    {tokens:["On","Sundays","we","visit","my","grandmother","'s","garden"], display:`On Sundays we visit my grandmother's garden.`},
+    {tokens:["After","school","I","do","my","sister","'s","homework"], display:`After school I do my sister's homework.`}
+  ]}
+},
+{
+  id:3, color:'blue', eyebrow:'Lezione 3', node:'3',
+  title:`Il plurale: l'apostrofo prima o dopo la s?`,
+  ruleBoxes:[
+    {tone:'blue', html:`<h3>👤 Un solo proprietario</h3><p>Se il proprietario è uno solo, aggiungi <b>'s</b> (apostrofo + s):</p>
+      <div class="result-sentence">my cousin's dog 🐕 <span class="hand" style="display:block;font-size:1.1rem;">(il cane di UN cugino)</span></div>`},
+    {tone:'lime', html:`<h3>👥 Più proprietari</h3><p>Se i proprietari sono più di uno e la parola è già plurale e finisce in <b>-s</b>, aggiungi <b>solo l'apostrofo</b>:</p>
+      <div class="result-sentence">my cousins' dog 🐕 <span class="hand" style="display:block;font-size:1.1rem;">(il cane DEI cugini, condiviso)</span></div>`},
+    {tone:'coral', html:`<h3>⚠️ Plurali irregolari</h3><p>Attenzione: child→children, man→men, woman→women NON finiscono in -s. Per loro si aggiunge comunque <b>'s</b> anche al plurale: <b>the children's toys</b>.</p>`}
+  ],
+  game:{type:'apostrophe', rounds:[
+    {words:["my","cousins","dog","is","very","friendly"], targetWord:1, correctGap:6, context:`Ho solo UN cugino: il suo cane è molto amichevole.`, explanation:`Un proprietario solo → apostrofo PRIMA della s finale: cousin's.`, duration:22},
+    {words:["my","cousins","dog","is","very","friendly"], targetWord:1, correctGap:7, context:`Ho DUE cugini: condividono lo stesso cane.`, explanation:`Più proprietari, la parola finisce già in -s → apostrofo DOPO la s: cousins'.`, duration:20},
+    {words:["my","friends","bike","has","a","flat","tyre"], targetWord:1, correctGap:6, context:`Ho un solo amico con la bici forata.`, explanation:`Un proprietario solo → 's prima della s finale: friend's.`, duration:18},
+    {words:["my","friends","bike","has","a","flat","tyre"], targetWord:1, correctGap:7, context:`Ho tre amici: la bici è di tutti loro insieme.`, explanation:`Più proprietari → apostrofo dopo la s: friends'.`, duration:16},
+    {words:["my","kids","favorite","toy","is","a","doll"], targetWord:1, correctGap:3, context:`Ho un solo figlio: il giocattolo preferito è il suo.`, explanation:`Un proprietario solo → apostrofo prima della s finale: kid's.`, duration:15},
+    {words:["my","kids","favorite","toy","is","a","doll"], targetWord:1, correctGap:4, context:`Ho più figli: il giocattolo preferito è di tutti loro.`, explanation:`Più proprietari → apostrofo dopo la s: kids'.`, duration:13}
+  ]}
+},
+{
+  id:4, color:'blue2', eyebrow:'Lezione 4', node:'4',
+  title:`Eccezioni: gli oggetti non vogliono la 's`,
+  ruleBoxes:[
+    {tone:'coral', html:`<h3>🚫 Non per le cose</h3><p>Il genitivo sassone si usa di solito per esseri viventi (persone, animali). Per gli oggetti inanimati si preferisce la struttura con <b>OF</b>.</p>
+      <div class="example-row">
+        <span class="tag dark strike">the table's legs</span>
+      </div>
+      <div class="result-sentence">the legs of the table 🪑</div>`},
+    {tone:'blue', html:`<h3>✅ Esseri viventi → 's</h3><p>Persone e animali invece prendono regolarmente 's:</p>
+      <div class="result-sentence">my brother's bike 🚲</div>`}
+  ],
+  game:{type:'truefalse', rounds:[
+    {sentence:`The cover of my notebook is pink.`, isTrue:true, explanation:`Oggetto inanimato (quaderno) → si usa OF, non 's. Corretto!`},
+    {sentence:`My dog's bowl is empty.`, isTrue:true, explanation:`Il proprietario è un animale (il cane) → 's corretto!`},
+    {sentence:`The windows of the school are big.`, isTrue:true, explanation:`Oggetto inanimato (scuola) → OF. Corretto!`},
+    {sentence:`The computer's keyboard is broken.`, isTrue:false, explanation:`Il computer è un oggetto: niente 's! Si dice "the keyboard of the computer".`},
+    {sentence:`My teacher's pen is blue.`, isTrue:true, explanation:`Il proprietario è una persona (l'insegnante) → 's corretto!`},
+    {sentence:`The garden's gate is old.`, isTrue:false, explanation:`Il giardino è un oggetto/luogo: niente 's, serve OF → "the gate of the garden".`},
+    {sentence:`The cat's whiskers are long.`, isTrue:true, explanation:`Il proprietario è un animale (il gatto) → 's corretto!`},
+    {sentence:`The clock's hands are broken.`, isTrue:false, explanation:`L'orologio è un oggetto: niente 's, serve OF → "the hands of the clock".`}
+  ]}
+},
+{
+  id:5, color:'lime', eyebrow:'Lezione 5', node:'5',
+  title:`Quando il nome sparisce`,
+  ruleBoxes:[
+    {tone:'lime', html:`<h3>🏠 Il luogo sottinteso</h3><p>Quando il possessore è un luogo conosciuto (negozio, casa di qualcuno), si può eliminare la cosa posseduta perché è sottintesa.</p>
+      <div class="result-sentence">I go to the baker's. 🥖<span class="hand" style="display:block;font-size:1.1rem;">(= the baker's shop)</span></div>`},
+    {tone:'lavender', html:`<h3>⚠️ Ma l'apostrofo resta!</h3><p>L'apostrofo non deve mai sparire.</p>
+      <div class="example-row"><span class="tag dark strike">my mums car</span></div>
+      <div class="result-sentence">my mum's car ✅</div>`}
+  ],
+  game:{type:'truefalse', rounds:[
+    {sentence:`I left my keys at Marco's.`, isTrue:true, explanation:`"Marco's" = "a casa di Marco", il nome sottinteso è corretto!`},
+    {sentence:`We are meeting at the cinemas tonight.`, isTrue:false, explanation:`Il cinema non è una persona/negozio: niente apostrofo, si dice solo "at the cinema".`},
+    {sentence:`She's having lunch at her aunt's today.`, isTrue:true, explanation:`"Aunt's" = "a casa di sua zia". Corretto!`},
+    {sentence:`We bought bread at the bakers shop.`, isTrue:false, explanation:`Manca l'apostrofo: si scrive "baker's shop".`},
+    {sentence:`He works at the butcher's on Mondays.`, isTrue:true, explanation:`"Butcher's" = "dal macellaio", negozio sottinteso. Corretto!`},
+    {sentence:`I'm going to my uncles for the holidays.`, isTrue:false, explanation:`Manca l'apostrofo: si scrive "my uncle's".`}
+  ]}
+}
+];
+
+const FINAL_ROUNDS = [
+  {it:`Lo zaino di Sofia è viola.`, tokens:["Sofia","'s","backpack","is","purple"], note:`Un solo proprietario → 's.`},
+  {it:`Le gambe del tavolo sono di legno.`, tokens:["The","legs","of","the","table","are","wooden"], note:`Oggetto inanimato → si usa OF, non 's.`},
+  {it:`Il cane dei miei cugini è molto vivace.`, tokens:["My","cousins","'","dog","is","very","lively"], note:`Più proprietari, parola già in -s → solo l'apostrofo.`},
+  {it:`Ogni sabato visitiamo la fattoria di mio zio.`, tokens:["Every","Saturday","we","visit","my","uncle","'s","farm"], note:`Un solo proprietario → 's.`},
+  {it:`Vado dal panettiere ogni venerdì.`, tokens:["I","go","to","the","baker","'s","every","Friday"], note:`Negozio sottinteso: the baker's (shop).`},
+  {it:`Il tetto della scuola è grigio.`, tokens:["The","roof","of","the","school","is","grey"], note:`Oggetto inanimato → OF.`},
+  {it:`I giocattoli preferiti dei bambini sono nella scatola.`, tokens:["The","children","'s","favourite","toys","are","in","the","box"], note:`Plurale irregolare (children) → si aggiunge comunque 's.`},
+  {it:`Domani vado dal dentista per un controllo.`, tokens:["Tomorrow","I","am","going","to","the","dentist","'s","for","a","check-up"], note:`Negozio/luogo sottinteso: the dentist's.`}
+];
+
+/* ---------------------------------------------------------
+   STATE
+   --------------------------------------------------------- */
+const state = {
+  results:{},        // lessonId -> {correct,total}
+  finalResult:null    // {correct,total}
+};
+
+const app = document.getElementById('app');
+
+/* ---------------------------------------------------------
+   HOME / PATH
+   --------------------------------------------------------- */
+function starsFor(correct,total){
+  if(total===0) return 0;
+  const pct = correct/total;
+  if(pct>=0.99) return 3;
+  if(pct>=0.7) return 2;
+  if(pct>0) return 1;
+  return 0;
+}
+function starsHTML(n){
+  return '⭐'.repeat(n) + '☆'.repeat(3-n);
+}
+
+function renderHome(){
+  let nodesHTML = '';
+  LESSONS.forEach((lesson, idx)=>{
+    const res = state.results[lesson.id];
+    const stars = res ? starsFor(res.correct,res.total) : 0;
+    const status = res ? `Completata` : `Da iniziare`;
+    nodesHTML += `
+      <div class="node-row">
+        <button class="node c-${lesson.color}" data-lesson="${lesson.id}">${lesson.node}</button>
+        <div class="node-info">
+          <div class="ntitle">${lesson.title}</div>
+          <div class="nstars">${res ? starsHTML(stars) : '<span style="opacity:.35">☆☆☆</span>'}</div>
+          <div class="nstatus">${status}</div>
+        </div>
+      </div>`;
+  });
+
+  const fres = state.finalResult;
+  const fstars = fres ? starsFor(fres.correct,fres.total) : 0;
+  nodesHTML += `
+    <div class="node-row">
+      <button class="node c-gold" data-final="1">🏁</button>
+      <div class="node-info">
+        <div class="ntitle">Sfida finale: tutte le regole insieme!</div>
+        <div class="nstars">${fres ? starsHTML(fstars) : '<span style="opacity:.35">☆☆☆</span>'}</div>
+        <div class="nstatus">${fres ? 'Completata' : 'Sblocca dopo le 5 lezioni'}</div>
+      </div>
+    </div>`;
+
+  app.innerHTML = `
+    <div class="home-header">
+      ${mascotSVG(86,true)}
+      <h1>Il Genitivo Sassone</h1>
+      <p>Un percorso di giochi per diventare campioni della 's ✍️</p>
+    </div>
+    ${waveSVG('var(--coral)')}
+    <div class="path">${nodesHTML}</div>
+    <div class="signature">
+      <div class="sig" style="font-size:2rem;">Ms Fatigato</div>
+    </div>
+  `;
+
+  app.querySelectorAll('.node[data-lesson]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const lesson = LESSONS.find(l=>l.id===Number(btn.dataset.lesson));
+      renderIntro(lesson);
+    });
+  });
+  const finalBtn = app.querySelector('.node[data-final]');
+  if(finalBtn){
+    finalBtn.addEventListener('click', renderFinalIntro);
+  }
+  window.scrollTo(0,0);
+}
+
+/* ---------------------------------------------------------
+   LESSON INTRO (rule pages)
+   --------------------------------------------------------- */
+function renderIntro(lesson){
+  const boxesHTML = lesson.ruleBoxes.map(b=>`<div class="panel rule-card ${b.tone}">${b.html}</div>`).join('');
+  app.innerHTML = `
+    <div class="topbar">
+      <button class="backbtn" id="homeBtn">←</button>
+      <span class="eyebrow">${lesson.eyebrow}</span>
+      <span style="width:42px"></span>
+    </div>
+    <h2 style="text-align:center;margin-bottom:16px;font-size:1.3rem;">${lesson.title}</h2>
+    ${boxesHTML}
+    ${waveSVG('var(--' + (lesson.color==='blue2'?'blue-deep':lesson.color) + ')')}
+    <div style="text-align:center;">
+      <button class="btn lavender" id="startBtn">🎮 Inizia il gioco</button>
+    </div>
+  `;
+  document.getElementById('homeBtn').onclick = renderHome;
+  document.getElementById('startBtn').onclick = ()=> startLessonGame(lesson);
+  window.scrollTo(0,0);
+}
+
+function renderFinalIntro(){
+  const bullets = [
+    ['var(--blue)', `1️⃣ Il proprietario + 's + l'oggetto (l'ordine si ribalta!)`],
+    ['var(--lavender)', `2️⃣ La regola vale anche dentro frasi lunghe`],
+    ['var(--lime-deep)', `3️⃣ Plurale in -s → solo l'apostrofo dopo; plurale irregolare → 's`],
+    ['var(--coral)', `4️⃣ Oggetti inanimati → si usa OF, non 's`],
+    ['var(--blue-deep)', `5️⃣ Per i luoghi conosciuti si può omettere la cosa posseduta`]
+  ];
+  app.innerHTML = `
+    <div class="topbar">
+      <button class="backbtn" id="homeBtn">←</button>
+      <span class="eyebrow" style="background:var(--gold);box-shadow:0 3px 0 var(--gold-deep);">Sfida finale</span>
+      <span style="width:42px"></span>
+    </div>
+    <h2 style="text-align:center;margin-bottom:6px;font-size:1.3rem;">🏁 Tutte le regole insieme!</h2>
+    <p style="text-align:center;font-weight:700;opacity:0.7;margin-bottom:18px;">8 frasi italiane da tradurre in inglese. Se sei in difficoltà, chiedi un indizio: le parole appariranno da riordinare!</p>
+    <div class="panel" style="margin-bottom:18px;">
+      ${bullets.map(b=>`<p style="margin:0 0 10px;font-weight:700;"><span style="color:${b[0]}">●</span> ${b[1]}</p>`).join('')}
+    </div>
+    <div style="text-align:center;">
+      <button class="btn gold" id="startFinalBtn">🏆 Inizia la sfida finale</button>
+    </div>
+  `;
+  document.getElementById('homeBtn').onclick = renderHome;
+  document.getElementById('startFinalBtn').onclick = runFinalGame;
+  window.scrollTo(0,0);
+}
+
+function startLessonGame(lesson){
+  if(lesson.game.type==='order') runOrderGame(lesson, lesson.game.rounds, (c,t)=>finishLesson(lesson,c,t));
+  else if(lesson.game.type==='apostrophe') runApostropheGame(lesson, lesson.game.rounds, (c,t)=>finishLesson(lesson,c,t));
+  else if(lesson.game.type==='truefalse') runTrueFalseGame(lesson, lesson.game.rounds, (c,t)=>finishLesson(lesson,c,t));
+}
+
+function finishLesson(lesson, correct, total){
+  state.results[lesson.id] = {correct,total};
+  renderComplete(lesson.eyebrow, lesson.title, correct, total, renderHome);
+}
+
+function renderComplete(eyebrow, title, correct, total, onContinue){
+  const stars = starsFor(correct,total);
+  const msg = stars===3 ? `Perfetto! Sei un vero esperto del genitivo sassone! 🌟`
+            : stars===2 ? `Molto bene! Ci sei quasi! 💪`
+            : stars===1 ? `Bel tentativo, riprova per migliorare! 🙂`
+            : `Niente paura, la pratica rende perfetti. Riprova! 🌱`;
+  app.innerHTML = `
+    <div class="complete-wrap">
+      ${mascotSVG(96,true)}
+      <span class="eyebrow">${eyebrow} completata</span>
+      <h2 style="margin:12px 0 4px;font-size:1.25rem;">${title}</h2>
+      <div class="stars-big">${starsHTML(stars)}</div>
+      <div class="score-line">${correct} / ${total} corrette</div>
+      <p style="font-weight:700;opacity:0.75;">${msg}</p>
+      <div class="btn-row" style="justify-content:center;">
+        <button class="btn lavender" id="contBtn">🗺️ Torna alla mappa</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('contBtn').onclick = onContinue;
+  window.scrollTo(0,0);
+}
+
+/* ---------------------------------------------------------
+   ORDER GAME  (riordina le parole)
+   --------------------------------------------------------- */
+function runOrderGame(lesson, rounds, onFinish){
+  let idx = 0, correct = 0;
+
+  function showRound(){
+    if(idx >= rounds.length){ onFinish(correct, rounds.length); return; }
+    const round = rounds[idx];
+
+    app.innerHTML = `
+      <div class="topbar">
+        <button class="backbtn" id="homeBtn">←</button>
+        <span class="eyebrow">${lesson.eyebrow}</span>
+        <span class="progress">${idx+1} / ${rounds.length}</span>
+      </div>
+      <div class="game-stage">
+        <p class="prompt-title">🧩 Riordina le parole per formare la frase corretta</p>
+        <div id="orderContainer"></div>
+        <div id="feedbackArea"></div>
+        <div class="btn-row" id="btnRow"></div>
+      </div>
+    `;
+    document.getElementById('homeBtn').onclick = renderHome;
+
+    mountWordOrderGame(document.getElementById('orderContainer'), round.tokens, {
+      onAttempt: (ok)=>{ if(ok) correct++; },
+      onSuccess: ()=>{
+        const feedbackArea = document.getElementById('feedbackArea');
+        const btnRow = document.getElementById('btnRow');
+        feedbackArea.innerHTML = `
+          <div class="feedback good">
+            <div class="fline">✅ Esatto!</div>
+            <div class="fexpl">${round.display}</div>
+          </div>`;
+        btnRow.innerHTML = `<button class="btn" id="nextBtn">${idx+1 < rounds.length ? 'Avanti →' : 'Vedi i risultati →'}</button>
+          <button class="btn ghost" id="speakBtn">🔊 Ascolta</button>`;
+        document.getElementById('nextBtn').onclick = ()=>{ idx++; showRound(); };
+        document.getElementById('speakBtn').onclick = ()=> speak(round.display);
+      },
+      onWrong: (resetFn)=>{
+        const feedbackArea = document.getElementById('feedbackArea');
+        const btnRow = document.getElementById('btnRow');
+        feedbackArea.innerHTML = `
+          <div class="feedback bad">
+            <div class="fline">❌ Non ancora, l'ordine non è giusto.</div>
+            <div class="fexpl">Tocca le parole nella frase per rimuoverle e riprova!</div>
+          </div>`;
+        btnRow.innerHTML = `<button class="btn coral" id="retryBtn">🔁 Svuota e riprova</button>`;
+        document.getElementById('retryBtn').onclick = ()=>{ feedbackArea.innerHTML=''; btnRow.innerHTML=''; resetFn(); };
+      }
+    });
+
+    window.scrollTo(0,0);
+  }
+
+  showRound();
+}
+
+/* ---------------------------------------------------------
+   APOSTROPHE SCROLLER GAME
+   --------------------------------------------------------- */
+function runApostropheGame(lesson, rounds, onFinish){
+  let idx = 0, correct = 0;
+  let styleTag = null;
+
+  function buildSentenceHTML(words){
+    let html = '';
+    words.forEach((word, wi)=>{
+      const letters = word.split('');
+      for(let g=0; g<=letters.length; g++){
+        html += `<span class="gap" data-w="${wi}" data-g="${g}" tabindex="0"></span>`;
+        if(g < letters.length) html += `<span class="letter">${letters[g]}</span>`;
+      }
+      if(wi < words.length-1) html += `<span class="wordspace"></span>`;
+    });
+    return html;
+  }
+
+  function revealSentenceHTML(words, targetWord, correctGap){
+    let html = '';
+    words.forEach((word, wi)=>{
+      const letters = word.split('');
+      for(let g=0; g<=letters.length; g++){
+        if(wi===targetWord && g===correctGap) html += `<span class="letter apos-mark">'</span>`;
+        if(g < letters.length) html += `<span class="letter">${letters[g]}</span>`;
+      }
+      if(wi < words.length-1) html += `<span class="wordspace"></span>`;
+    });
+    return html;
+  }
+
+  function showRound(){
+    if(idx >= rounds.length){ onFinish(correct, rounds.length); return; }
+    const round = rounds[idx];
+    let answered = false;
+    const animName = `slide${idx}_${Date.now()}`;
+
+    app.innerHTML = `
+      <div class="topbar">
+        <button class="backbtn" id="homeBtn">←</button>
+        <span class="eyebrow">${lesson.eyebrow}</span>
+        <span class="progress">${idx+1} / ${rounds.length}</span>
+      </div>
+      <div class="game-stage">
+        <p class="prompt-title">✍️ Tocca il punto giusto per inserire l'apostrofo</p>
+        <div class="context-box">${round.context}</div>
+        <div class="timerbar"><div class="fill" id="timerFill"></div></div>
+        <div class="track-wrapper" id="trackWrapper">
+          <div class="track" id="track">${buildSentenceHTML(round.words)}</div>
+        </div>
+        <p class="hint">La frase scorre lentamente: trova la parola giusta e tocca il punto dove va l'apostrofo!</p>
+        <div id="feedbackArea"></div>
+        <div class="btn-row" id="btnRow"></div>
+      </div>
+    `;
+    document.getElementById('homeBtn').onclick = ()=>{ if(styleTag) styleTag.remove(); renderHome(); };
+
+    if(styleTag) styleTag.remove();
+    styleTag = document.createElement('style');
+    styleTag.innerHTML = `@keyframes ${animName}{ from{left:100%;} to{left:-100%;} }
+      #track.anim-${animName}{ animation: ${animName} ${round.duration}s linear forwards; }
+      #timerFill.anim-${animName}{ animation: shrink-${animName} ${round.duration}s linear forwards; }
+      @keyframes shrink-${animName}{ from{width:100%;} to{width:0%;} }`;
+    document.head.appendChild(styleTag);
+
+    const track = document.getElementById('track');
+    const timerFill = document.getElementById('timerFill');
+    track.classList.add('anim-'+animName);
+    timerFill.classList.add('anim-'+animName);
+
+    let timeoutId = setTimeout(()=>{ if(!answered) finalize(false); }, round.duration*1000 + 150);
+
+    track.querySelectorAll('.gap').forEach(gapEl=>{
+      gapEl.addEventListener('click', ()=>{
+        if(answered) return;
+        const w = Number(gapEl.dataset.w);
+        const g = Number(gapEl.dataset.g);
+        finalize(w === round.targetWord && g === round.correctGap);
+      });
+    });
+
+    function finalize(isCorrect){
+      answered = true;
+      clearTimeout(timeoutId);
+      track.style.animation = 'none';
+      track.style.left = getComputedStyle(track).left;
+      timerFill.style.animation = 'none';
+      if(isCorrect) correct++;
+
+      track.innerHTML = revealSentenceHTML(round.words, round.targetWord, round.correctGap);
+
+      const feedbackArea = document.getElementById('feedbackArea');
+      const btnRow = document.getElementById('btnRow');
+      feedbackArea.innerHTML = `
+        <div class="feedback ${isCorrect?'good':'bad'}">
+          <div class="fline">${isCorrect? '✅ Esatto!' : "❌ Quasi! Ecco dov'è la posizione giusta:"}</div>
+          <div class="fexpl">${round.explanation}</div>
+        </div>`;
+      btnRow.innerHTML = `<button class="btn" id="nextBtn">${idx+1 < rounds.length ? 'Avanti →' : 'Vedi i risultati →'}</button>`;
+      document.getElementById('nextBtn').onclick = ()=>{ idx++; showRound(); };
+    }
+
+    window.scrollTo(0,0);
+  }
+
+  showRound();
+}
+
+/* ---------------------------------------------------------
+   TRUE / FALSE GAME
+   --------------------------------------------------------- */
+function runTrueFalseGame(lesson, rounds, onFinish){
+  rounds = shuffle(rounds);
+  let idx = 0, correct = 0;
+
+  function showRound(){
+    if(idx >= rounds.length){ onFinish(correct, rounds.length); return; }
+    const round = rounds[idx];
+
+    app.innerHTML = `
+      <div class="topbar">
+        <button class="backbtn" id="homeBtn">←</button>
+        <span class="eyebrow">${lesson.eyebrow}</span>
+        <span class="progress">${idx+1} / ${rounds.length}</span>
+      </div>
+      <div class="game-stage">
+        <p class="prompt-title">🤔 La frase è giusta o sbagliata?</p>
+        <div class="sentence-card">${round.sentence}</div>
+        <div class="tf-row" id="tfRow">
+          <button class="btn lime" data-choice="true">✅ Giusta</button>
+          <button class="btn coral" data-choice="false">❌ Sbagliata</button>
+        </div>
+        <div id="feedbackArea"></div>
+        <div class="btn-row" id="btnRow"></div>
+      </div>
+    `;
+    document.getElementById('homeBtn').onclick = renderHome;
+
+    document.querySelectorAll('#tfRow .btn').forEach(btn=>{
+      btn.onclick = ()=>{
+        const choice = btn.dataset.choice === 'true';
+        const isCorrect = choice === round.isTrue;
+        if(isCorrect) correct++;
+        document.querySelectorAll('#tfRow .btn').forEach(b=>b.disabled=true);
+
+        const feedbackArea = document.getElementById('feedbackArea');
+        const btnRow = document.getElementById('btnRow');
+        feedbackArea.innerHTML = `
+          <div class="feedback ${isCorrect?'good':'bad'}">
+            <div class="fline">${isCorrect? '✅ Esatto!' : (round.isTrue ? '❌ In realtà è GIUSTA.' : '❌ In realtà è SBAGLIATA.')}</div>
+            <div class="fexpl">${round.explanation}</div>
+          </div>`;
+        btnRow.innerHTML = `<button class="btn" id="nextBtn">${idx+1 < rounds.length ? 'Avanti →' : 'Vedi i risultati →'}</button>`;
+        document.getElementById('nextBtn').onclick = ()=>{ idx++; showRound(); };
+      };
+    });
+
+    window.scrollTo(0,0);
+  }
+
+  showRound();
+}
+
+/* ---------------------------------------------------------
+   FINAL CHALLENGE — Italian → English translation.
+   If the player asks for a hint, the screen switches to a
+   word-reorder helper (reusing mountWordOrderGame).
+   --------------------------------------------------------- */
+function runFinalGame(){
+  let idx = 0, correct = 0;
+  const rounds = shuffle(FINAL_ROUNDS);
+
+  function goNext(){ idx++; showRound(); }
+
+  function showRound(){
+    if(idx >= rounds.length){ finishFinal(correct, rounds.length); return; }
+    const round = rounds[idx];
+    const correctSentence = joinTokens(round.tokens) + '.';
+    let scored = false;
+    let hintUsed = false;
+    let locked = false;
+
+    app.innerHTML = `
+      <div class="topbar">
+        <button class="backbtn" id="homeBtn">←</button>
+        <span class="eyebrow" style="background:var(--gold);box-shadow:0 3px 0 var(--gold-deep);">Sfida finale</span>
+        <span class="progress">${idx+1} / ${rounds.length}</span>
+      </div>
+      <div class="game-stage">
+        <p class="prompt-title">📝 Traduci in inglese</p>
+        <div class="sentence-card">${round.it}</div>
+        <div id="answerArea">
+          <input type="text" id="translateInput" class="text-input" placeholder="Scrivi la traduzione in inglese..." autocomplete="off" autocapitalize="off" />
+          <div class="btn-row">
+            <button class="btn gold" id="checkBtn">✅ Controlla</button>
+            <button class="btn ghost" id="hintBtn">💡 Indizio</button>
+          </div>
+        </div>
+        <div id="feedbackArea"></div>
+        <div class="btn-row" id="btnRow"></div>
+      </div>
+    `;
+    document.getElementById('homeBtn').onclick = renderHome;
+
+    const input = document.getElementById('translateInput');
+    const checkBtn = document.getElementById('checkBtn');
+    const hintBtn = document.getElementById('hintBtn');
+
+    input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); doCheck(); } });
+    checkBtn.onclick = doCheck;
+    hintBtn.onclick = useHint;
+
+    function showSuccess(){
+      const feedbackArea = document.getElementById('feedbackArea');
+      const btnRow = document.getElementById('btnRow');
+      feedbackArea.innerHTML = `
+        <div class="feedback good">
+          <div class="fline">${hintUsed ? "👍 Frase completata con l'aiuto dell'indizio." : '✅ Esatto!'}</div>
+          <div class="fexpl">${correctSentence}<br><span style="opacity:.8;">${round.note}</span></div>
+        </div>`;
+      btnRow.innerHTML = `<button class="btn gold" id="nextBtn">${idx+1<rounds.length?'Avanti →':'Vedi i risultati →'}</button>`;
+      document.getElementById('nextBtn').onclick = goNext;
+    }
+
+    function doCheck(){
+      if(locked) return;
+      const val = input.value.trim();
+      if(!val) return;
+      const isCorrect = normalizeAnswer(val) === normalizeAnswer(correctSentence);
+      if(!scored){ scored = true; if(isCorrect && !hintUsed) correct++; }
+      if(isCorrect){
+        locked = true;
+        input.disabled = true;
+        checkBtn.disabled = true;
+        hintBtn.disabled = true;
+        showSuccess();
+      } else {
+        document.getElementById('feedbackArea').innerHTML = `
+          <div class="feedback bad">
+            <div class="fline">❌ Non ancora giusta.</div>
+            <div class="fexpl">Controlla l'ordine delle parole e l'apostrofo, poi riprova oppure chiedi un indizio.</div>
+          </div>`;
+      }
+    }
+
+    function useHint(){
+      if(locked) return;
+      hintUsed = true;
+      if(!scored) scored = true;
+      const answerArea = document.getElementById('answerArea');
+      answerArea.innerHTML = `
+        <p class="hint" style="margin-bottom:8px;">💡 Riordina le parole per formare la frase:</p>
+        <div id="hintOrderContainer"></div>
+        <p id="hintFeedback" style="text-align:center;font-weight:700;color:var(--coral-deep);min-height:20px;margin-top:8px;"></p>
+      `;
+      mountWordOrderGame(document.getElementById('hintOrderContainer'), round.tokens, {
+        onSuccess: ()=>{ locked = true; showSuccess(); },
+        onWrong: (resetFn)=>{
+          const hf = document.getElementById('hintFeedback');
+          if(hf) hf.textContent = '❌ Non ancora, riprova!';
+          resetFn();
+        }
+      });
+    }
+
+    window.scrollTo(0,0);
+  }
+
+  showRound();
+}
+
+function finishFinal(correct, total){
+  state.finalResult = {correct,total};
+  renderFinalComplete(correct,total);
+}
+
+function renderFinalComplete(correct,total){
+  const stars = starsFor(correct,total);
+  const big = stars>=2;
+  app.innerHTML = `
+    <div class="complete-wrap">
+      ${mascotSVG(110,true)}
+      <span class="eyebrow" style="background:var(--gold);box-shadow:0 3px 0 var(--gold-deep);">Sfida finale completata 🏆</span>
+      <h2 style="margin:14px 0 4px;font-size:1.4rem;">Hai conquistato il Genitivo Sassone!</h2>
+      <div class="stars-big">${starsHTML(stars)}</div>
+      <div class="score-line">${correct} / ${total} corrette</div>
+      <p style="font-weight:700;opacity:0.75;">${stars===3?'Punteggio pieno! Sei un vero campione! 🌟':stars===2?'Ottimo lavoro! 💪':stars===1?'Bel percorso, riprova le lezioni più deboli! 🙂':'Ripassa le lezioni e riprova: ce la puoi fare! 🌱'}</p>
+      <div class="btn-row" style="justify-content:center;">
+        <button class="btn lavender" id="contBtn">🗺️ Torna alla mappa</button>
+      </div>
+      <div class="signature" style="margin-top:40px;">
+        <div class="sig">un gioco di</div>
+        <div class="sig" style="font-size:2rem;">Ms Fatigato</div>
+      </div>
+    </div>
+  `;
+  document.getElementById('contBtn').onclick = renderHome;
+  if(big) launchConfetti();
+  window.scrollTo(0,0);
+}
+
+function launchConfetti(){
+  const colors = ['var(--blue)','var(--lavender)','var(--lime-deep)','var(--coral)','var(--gold)'];
+  for(let i=0;i<28;i++){
+    const c = document.createElement('div');
+    c.className='confetti';
+    c.style.left = Math.random()*100+'vw';
+    c.style.background = colors[i%colors.length];
+    c.style.animationDuration = (2.2+Math.random()*1.6)+'s';
+    c.style.animationDelay = (Math.random()*0.6)+'s';
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(), 4500);
+  }
+}
+
+/* ---------------------------------------------------------
+   INIT
+   --------------------------------------------------------- */
+renderHome();
+</script>
+</body>
+</html>
